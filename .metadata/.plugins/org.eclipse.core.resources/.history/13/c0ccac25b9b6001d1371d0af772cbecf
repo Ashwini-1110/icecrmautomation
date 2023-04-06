@@ -1,0 +1,78 @@
+package com.ice_hrm_automation;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class IcehrmBirhdateSelection {
+
+	public static void main(String[] args) throws InterruptedException 
+	{Integer s = null;
+		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		//it is a instance of chrome driver  used to launch the  browser	
+		WebDriver driver= new ChromeDriver();
+		//navigation on website	
+		driver.get("https://cybersuccess.icehrm.com/");
+		//it find element to enter username
+		//1.valid username and valid password
+		WebElement Username=driver.findElement(By.id("username"));
+		Username.sendKeys("admin");
+
+		WebElement Password=driver.findElement(By.id("password"));
+		Password.sendKeys("2zuzfakn");
+
+		WebElement LogIn=driver.findElement(By.xpath("//button[contains(text(),'Log in')]"));
+		LogIn.click();
+		
+		Thread.sleep(3000);
+		  
+		  driver.findElement(By.xpath("//span[text()=\"Employees\"]")).click();
+		  
+		  driver.findElement(By.xpath("//ul[@id='admin_Employees']//a[1]")).click();
+	 
+		  driver.findElement(By.xpath("//span[text()=' Add New']")).click();
+		  
+		  driver.findElement(By.id("birthday")).click();
+		  
+		  driver.findElement(By.xpath("//div[@class=\"ant-picker-header-view\"]/button[2]")).click();
+		  
+		  int Birthyear = 2000;
+		  
+		  String e =String.valueOf(Birthyear);
+		  
+		  List<WebElement> AllYear= driver.findElements(By.xpath("//table[@class='ant-picker-content']"));
+			
+//		  WebElement yearsfromList=  driver.findElement(By.xpath("//div[@class='ant-picker-cell-inner']"));
+//		  String YearINList=yearsfromList.getText();
+//		  System.out.println(YearINList);
+//		 Integer s= Integer.valueOf(YearINList);
+//		 WebElement yearsfromList=  driver.findElement(By.xpath("//td[@title=\"2019\"]"));
+		  
+		  for(int i =0; i<AllYear.size();i++)
+		  {
+		  WebElement YearINList=AllYear.get(i);
+		  //System.out.println(YearINList);
+		  String year =YearINList.getText(); 
+		  try {
+		  s= Integer.valueOf(year);}
+		  catch(NumberFormatException ex)
+		  {
+			  
+		  
+		 
+		  if(Birthyear>s) 
+		  {
+		  
+			  driver.findElement(By.xpath("//span[@class=\"ant-picker-super-prev-icon\"]")).click();
+		  }
+		  else
+		  {
+			  YearINList.click();
+		  }
+		  }
+	}}
+
+}

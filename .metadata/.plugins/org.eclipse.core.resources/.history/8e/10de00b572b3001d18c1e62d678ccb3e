@@ -1,0 +1,57 @@
+package com.ice_hrm_automation;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BrokenLinks 
+{
+       public static void main(String[] args)
+       {
+    	   System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+    	   
+    	   WebDriver driver = new ChromeDriver();
+    	   
+    	   driver.navigate().to("https://www.amazon.in/");
+    	   
+    	   List<WebElement> element = driver.findElements(By.tagName("img"));
+    	   
+    	   for(int i = 0; i<element.size();i++)
+    	   {
+    		  
+    		  WebElement Links = element.get(i);//get single element from array
+    		
+    		  String Imglink = Links.getAttribute("src");//get src attribute value of single element
+    		  //System.out.println(Imglink);
+    		  if(!Imglink.equals("null") && !Imglink.equals("javascript:void(0)") ) 
+    		  { try {
+    		  URL uri = new URL(Imglink);// convert string
+    		  URLConnection urlconnection=uri.openConnection();
+    		  HttpURLConnection httpurlconnection = (HttpURLConnection)  urlconnection;
+    		  httpurlconnection.connect(); //hitting the url
+    		   int statuscode = httpurlconnection.getResponseCode();
+    		   if(statuscode>=300) 
+    		   {
+    			   System.out.println("Broken Links :"+ "Status Code : "+ statuscode +"url"+ Imglink);
+    		   }
+    		   httpurlconnection.disconnect();
+    		   }
+    		  
+    		  catch(Exception e)
+    		   {
+    			   
+    		   }
+    		  
+    		  }
+    		  
+    	   }
+    driver.close();
+       
+   }       
+}

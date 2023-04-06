@@ -1,0 +1,10 @@
+package com.ice_hrm_automation;
+
+public class IcehrmBirhdateSelection {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

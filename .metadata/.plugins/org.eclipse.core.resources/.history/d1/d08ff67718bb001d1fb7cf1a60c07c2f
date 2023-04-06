@@ -1,0 +1,49 @@
+package com.ice_hrm_automation;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ExcelHandlingAssignment 
+{
+	public static void main(String [] args)
+	{
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		
+		WebDriver driver = new ChromeDriver();
+	
+		driver.navigate().to("https://opensource-demo.orangehrmlive.com/");
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		driver.findElement(By.name("username")).sendKeys("Admin");
+		
+		driver.findElement(By.name("password")).sendKeys("admin123");
+		
+		driver.findElement(By.xpath("//button[@type='submit']")).submit();
+		
+		driver.findElement(By.xpath("//div[@id='app']/div[1]/div[1]/aside/nav/div[2]/ul/li[2]")).click();
+		
+		driver.findElement(By.xpath("//div[@class='oxd-layout-context']/div/div/div[1]/div[2]/div[3]/button")).click();
+		
+		List<WebElement> Columns = driver.findElements(By.xpath("//div[@class='oxd-table orangehrm-employee-list']/div[1]/div/div/div[1]/div"));
+		
+		int totalResult= Columns.size();
+	    System.out.println("Total Result="+ totalResult);
+	    
+		for(int i = 1; i<Columns.size(); i++)
+		{
+		WebElement Columnin1stRow= Columns.get(i);
+		
+		String Col = Columnin1stRow.getAttribute("Columnin1stRow");
+			
+			System.out.println(Col);
+		}
+		
+	}
+
+}

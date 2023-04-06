@@ -1,0 +1,58 @@
+package ice_hrm_automation.emppage;
+
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import com.ice_hrm_automation_pages.EmpPage;
+import com.ice_hrm_automation_pages.LoginPage;
+import com.ice_hrm_automation_utility.BaseClass;
+import com.ice_hrm_automation_utility.PropertyHandling;
+
+public class EmpTest extends BaseClass  
+{   
+	EmpPage emppage;
+	@BeforeClass
+	public void before()
+	{
+	PropertyHandling property = new PropertyHandling();
+	launchBrowser(property.getProperty("browser"));
+	//System.out.println("driver value 1 "+driver);
+	driver.get(property.getProperty("icehrmurl"));
+	
+	property.getProperty("icehrmusername");
+	property.getProperty("icehrmpassword");
+	
+	emppage = new EmpPage(driver);
+}
+	@Test(dataProvider="getLoginData")
+	public void login(String username , String password)
+	{
+		 emppage.login(username, password);	
+	}
+	@DataProvider
+	public Object[][] getLoginData()
+	  {
+		Object[][] obj = new Object[][]{
+			 {"admin","2zuzfakn" }
+			 
+		 } ;
+		 return obj;
+	  }
+  @Test(dataProvider ="addempData")
+  public void verifyaddEmp(String id) 
+  {
+	  emppage.addEmp(id);
+  }
+  
+  @DataProvider
+  public Object[][] addempData()
+  {
+	  Object[][] obj = new Object[][] {
+		  {"8788158009"}
+		  
+	  };
+	  return obj;
+  }
+}

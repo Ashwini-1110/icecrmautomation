@@ -1,0 +1,90 @@
+package parallelExecution;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class NewTest1 {
+	
+	
+	@BeforeGroups(groups={"Sanity"})
+	
+	public void beforeGroup() {
+		System.out.println("Before group from New Test 1");
+	}
+	
+	@AfterGroups(groups={"Sanity"})
+	public void afterGroup()
+	{
+		System.out.println("After group from New Test 1");
+	}
+		  @BeforeSuite (groups={"Sanity"})
+		  public void beforeSuite() 
+		  {
+			  System.out.println("Before Suite from New Test 1");
+		  }
+		  
+		 @BeforeTest
+		 public void beforeTest()
+		 {
+			 System.out.println("Before Test from New Test 1");
+		 }
+		 
+		 @BeforeClass (groups={"Sanity"})
+		 public void beforeClass()
+		 {
+			 System.out.println("Before Class from New Test 1");
+		 }
+		 
+		 @BeforeMethod
+		 public void beforeMethod()
+		 {
+			 System.out.println("Before Method from New Test 1");
+		 }
+		 
+		 @Test (groups={"Sanity"})
+		 public void test()
+		 {
+			 System.out.println(" Test from New Test 1");
+		 }
+		 
+		 @Test (groups={"Regression"})
+		 public void test2()
+		 {
+			 System.out.println(" Test from New Test 1");
+		 }
+		 
+		 @AfterMethod
+		 public void afterMethod()
+		 {
+			 System.out.println("After Method from New Test 1");
+		 }
+		 
+		 @AfterClass (groups={"Sanity"})
+		 public void afterClass()
+		 {
+			 System.out.println("After Class from New Test 1");
+		 }
+		 
+		 @AfterTest
+		 public void afterTest()
+		 {
+			 System.out.println("After Test from New Test 1");
+		 }
+		 
+		 @AfterSuite (groups={"Sanity"})
+		 public void afterSuite()
+		 {
+			 System.out.println("After Suite from New Test 1");
+		 }
+		}
+
+

@@ -1,0 +1,39 @@
+package com.ice_hrm_automation_pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import com.ice_hrm_automation_utility.BaseClass;
+
+public class EmpPage extends BaseClass
+{
+	public void EmpPage(WebDriver driver)
+	{
+		this.driver= driver;
+	}
+	By username = By.name("username");
+	By password = By.name("password");
+	By Login = By.xpath("//button[text()='Log in ']");
+	By Employeemenu = By.xpath("//span[text()='Employees']");
+	By EmployeesubMenu = By.xpath("//ul[@id='admin_Employees']//a[1]");
+	By addnew = By.xpath("//span[text()=' Add New']");
+    By id = By.id("employee_i");
+    
+    public void login(String username , String password)
+    {
+    	enterText(this.username , username);
+    	enterText(this.password, password);
+    	click(Login);
+    	click(Employeemenu);
+    	click(EmployeesubMenu);
+    	click(addnew);
+    }
+    public void addEmp(String id)
+    {
+//    	click(Login);
+//    	click(Employeemenu);
+//    	click(EmployeesubMenu);
+//    	click(addnew);
+    	enterText(this.id , id);
+    }
+}

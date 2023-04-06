@@ -1,0 +1,122 @@
+package com.ice_hrm_automation_TestNG;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.ice_hrm_automation.BaseClass;
+
+
+public class AddEmployeeInIcehrm extends BaseClass
+{
+  @BeforeMethod
+  public void beforeMethod() 
+  {
+	  launchBrowser("chrome");
+	  
+	  driver.get("https://cybersuccess.icehrm.com/");
+	  
+	  enterText(By.id("username"),"admin");
+		
+	  enterText(By.id("password"),"2zuzfakn");
+		
+	  click(By.xpath("//button[contains(text(),'Log in')]"));
+	  
+	  click(By.xpath("//span[text()=\"Employees\"]"));
+	  
+	  click(By.xpath("//ul[@id='admin_Employees']//a[1]"));
+		
+  }
+  @Test
+  public void addEmp()
+  {
+	  click(By.xpath("//span[text()=' Add New']"));
+	  
+	  enterText(By.id("employee_id"),"8788158009");
+	  
+	  enterText(By.id("first_name"),"Ashwini");
+	  
+	  enterText(By.id("middle_name"),"Ramhari");
+	  
+	  enterText(By.id("last_name"),"Doke");
+	  
+	  enterText(By.id("birthday"),"2000-10-11");
+	  
+// List<WebElement> nationality= driver.findElements(By.xpath("//div[@id='rc_select_0_list']/following::div[1]/div[1]/div/div/div"));
+//	  
+//	  for(int i=0; i<nationality.size();i++) 
+//	  {
+//		  WebElement country= nationality.get(i);
+//		  
+//		  String selectcountry = country.getText();
+//		  
+//		  if(selectcountry.equals("Austrian"))
+//          {
+//			  System.out.println(selectcountry);
+//			  country.click();
+//			  break;
+//		  }
+//	  }
+	  
+	 click(By.id("rc_select_1"));
+	 
+	 List<WebElement> genderdropdown = driver.findElements(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
+	  
+	  for(int i= 0; i<genderdropdown.size(); i++)
+	  {
+		  WebElement elements = genderdropdown.get(i); 
+		  
+		  String Gender = elements.getText();
+		  
+		  if(Gender.equals("Female"))
+		  { System.out.println(Gender);
+			  elements.click();
+			  break;
+		  }
+	  }
+	  
+	  click(By.id("rc_select_2"));
+	  
+	  List<WebElement> marriedstatus =driver.findElements(By.xpath("//div[@id='rc_select_2_list']/following::div[4]/div"));
+		//Thread.sleep(3000);
+		  for(int i= 0; i<marriedstatus.size(); i++)
+		  {
+			  WebElement status =marriedstatus.get(i);
+			  
+			  String MarritalStatus = status.getText();
+			  
+			  if(MarritalStatus.equals("Single"))
+			  {
+				System.out.println(MarritalStatus);  
+				status.click();
+				break;
+			  }
+		  }
+		  
+		  click(By.xpath("//span[text()='Save']"));
+		  
+		//  List<WebElement> nationality= driver.findElements(By.xpath("//div[@id='rc_select_0_list']/following::div[1]/div[1]/div/div/div"));
+		  
+		 driver.findElement(By.xpath("//input[@id='s2id_autogen1_search']")).click();
+		 
+		 driver.findElement(By.xpath("//div[text()='Indian']")).click();
+		  
+//		  WebElement nextpage = driver.findElement(By.xpath("//div[text()='Employment Status']"));
+//		  
+//		  if(nextpage.isDisplayed())
+//		  {
+//			  System.out.println("next page is open");
+//		  }
+//		  else
+//		  {
+//			  System.out.println("required filled is mandatory");
+//		  }
+	  
+  }
+  
+
+
+}

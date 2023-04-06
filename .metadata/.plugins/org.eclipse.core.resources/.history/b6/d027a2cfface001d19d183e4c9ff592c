@@ -1,0 +1,128 @@
+package com.ice_hrm_automation_utility;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentReports;
+
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+public class TestListeners extends BaseClass implements ITestListener, ISuiteListener
+{ 
+	public TestListeners(WebDriver driver)
+	{
+		this.driver= driver;
+	}
+	 String reportpath;
+	 ExtentReports extentreport;
+	//@override
+  public void onStart(ISuite suite)
+  {
+	  System.out.println("onStart method of ISuite from Suite listener");
+	  
+	  LocalDateTime datetime = LocalDateTime.now();
+	  
+	  String currentdatetime= datetime.format(DateTimeFormatter.ofPattern("dd_MM_yy_hh_mm"));
+	  
+	  System.out.println(currentdatetime);
+	  
+	  reportpath = System.getProperty("user.dir")+"/reports/"+ "report_"+ currentdatetime;
+	  
+	  System.out.println(reportpath);
+	  
+	  System.out.println("driver0 "+ driver);
+	  File file = new File(reportpath);
+	  
+	  if(!file.exists())
+	  {
+		  // create a folder based on provided path
+		  file.mkdir();
+	  }
+	  
+	  String htmlreport = reportpath + "/AutomationReport.html";
+	  
+	  // help to create html files 
+	  
+	  ExtentSparkReporter sparkreporter = new ExtentSparkReporter(htmlreport);
+	  
+	  extentreport = new ExtentReports();
+	  
+	  extentreport.attachReporter(sparkreporter);
+	  
+	  
+  }
+  //@override
+  public void onFinish(ISuite suite)
+  {
+	  System.out.println("onFinish method of ISuite from Suite listener");
+	  
+	  extentreport.flush();
+  }
+  //@override
+  public void onStart(ITestContext context)
+  {
+	  System.out.println("onStart method of ITestContext from Test listener"); 
+  }
+  //@override
+  public void onFinish(ITestContext context) 
+  {
+	  System.out.println("onFinish method of ITestContext from Test listener");
+  }
+  //@override
+  public void onTestStart(ITestResult result)
+  {
+	  System.out.println("onStart method of ITestResult from Test listener");
+	  
+	  String methodname = result.getMethod().getMethodName();
+	  
+	    log = extentreport.createTest(methodname);
+  }
+  //@override
+  public void onTestSuccess(ITestResult result)
+  {
+	  System.out.println("onTestSuccess method of ITestResult from Test listener");
+  }
+  //@override
+  public void onTestFailure(ITestResult result)
+  {
+	  System.out.println("onTestFailure method of ITestResult from Test listener");
+	  
+	  System.out.println("driver5" +driver);
+	  String screenshot = reportpath + "/" +result.getMethod().getMethodName() + "jpg";
+	  
+	  TakesScreenshot takescreenshot = (TakesScreenshot)driver;
+	  //System.out.println("driver6"+ driver);
+	  File srcFile = takescreenshot.getScreenshotAs(OutputType.FILE);
+	  
+	  File dstFile = new File(screenshot);
+	  
+	  try 
+	  {
+		FileUtils.copyFile(srcFile, dstFile);
+	  }
+	  catch (IOException e) 
+	  {
+		throw new RuntimeException(e);
+	  }
+	  log.fail(result.getThrowable().getMessage());
+	  
+	  
+  }
+  //@override
+  public void onTestSkipped(ITestResult result)
+  {
+	  System.out.println("onTestSkipped method of ITestResult from Test listener");
+  }
+}

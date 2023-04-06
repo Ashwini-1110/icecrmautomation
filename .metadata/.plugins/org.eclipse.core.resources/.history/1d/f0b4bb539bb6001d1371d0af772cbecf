@@ -1,0 +1,76 @@
+package com.ice_hrm_automation;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+
+public class Calender {
+	 static WebDriver driver;
+	
+	public static void selectFututreDay(int FutureDay)
+	{
+	 driver.findElement(By.xpath("//div[@class=\"orangehrm-background-container\"]/div/div[2]/form/div[1]/div[7]/div/div[2]/div/div/input")).click();
+	 int currentDay = LocalDateTime.now().getDayOfMonth();
+	 int daytoselect = currentDay + FutureDay;
+	 List<WebElement> days = driver.findElements(By.xpath("//div[@class='oxd-calendar-dates-grid']"));
+	 
+	 for(WebElement elements : days )
+	 {
+		 String day = elements.getText(); 
+		 String Today = String.valueOf(daytoselect);
+		 if(day.equals(Today))
+				
+				elements.click();
+				break;
+	 }
+	}
+	public static void main(String [] args) throws InterruptedException
+	{
+		System.setProperty("webdriver.edge.driver", "msedgedriver.exe");	
+		 driver = new EdgeDriver();
+		 
+		 driver.navigate().to("https://opensource-demo.orangehrmlive.com/");
+		 Thread.sleep(5000);
+		 driver.findElement(By.name("username")).sendKeys("Admin");
+		 driver.findElement(By.name("password")).sendKeys("admin123");
+		 
+		 driver.findElement(By.xpath("//button[@type='submit']")).submit();
+		 Thread.sleep(3000);
+		 
+		 driver.findElement(By.xpath("//div[@id= \"app\"]/div[1]/div/aside/nav/div[2]/ul/li[7]/a/span")).click();
+		 Thread.sleep(3000);
+		
+		 driver.findElement(By.xpath("//div[@class=\"--toggle\"][2]/button")).click();
+		 driver.findElement(By.xpath("//div[@class=\"orangehrm-background-container\"]/div/div[2]/form/div[1]/div[6]/div/div[2]/div/div/i")).click();
+		 
+		 int currentDay = LocalDateTime.now().getDayOfMonth();
+		 //System.out.println(currentDay);
+		 
+		 List<WebElement> days = driver.findElements(By.xpath("//div[@class='oxd-calendar-dates-grid']"));
+		 
+		 for(WebElement element : days)
+		 {
+			String day = element.getText(); 
+			//System.out.println(day);
+			
+			String Today = String.valueOf(currentDay);
+			System.out.println(Today);
+			
+			if(day.equals(Today))
+			{
+			System.out.println("In else block");
+				element.click();
+				break;
+			}
+			
+		 }
+		 
+		 selectFututreDay(6);
+		 
+	}
+
+}

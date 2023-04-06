@@ -1,0 +1,39 @@
+package Collection1;
+
+import java.util.Enumeration;
+import java.util.Stack;
+import java.util.Vector;
+
+public class Cursors 
+{
+  public static void main(String [] args)
+  {
+//	  Vector v = new Vector();
+//	  v.add("Cyber");
+//	  v.add("Success");
+//	  v.add("Training");
+//	  v.remove(1);
+//	  
+//	  Enumeration e = v.elements();
+//	  
+//	  while(e.hasMoreElements())
+//	  {
+//		  System.out.println(e.nextElement());
+//	  }
+	  
+	  Stack s = new Stack();
+	  s.push( "Ashwini");
+	  s.add( "Doke");
+	  s.peek();
+	  s.push("Test Engineer");
+	  s.pop();
+	  Enumeration e = s.elements();
+	  
+	  while(e.hasMoreElements())
+	  {
+		  System.out.println(e.nextElement());
+	  }
+	  
+  }
+}
+

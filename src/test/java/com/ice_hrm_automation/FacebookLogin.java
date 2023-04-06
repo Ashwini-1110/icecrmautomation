@@ -1,0 +1,30 @@
+package com.ice_hrm_automation;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
+public class FacebookLogin 
+{
+    public static void main(String [] args)
+    {
+    	//System.setProperty("webdriver.edge.driver","msedgedriver.exe");
+    	EdgeOptions options = new EdgeOptions();
+		options.addArguments("start-maximized");
+		options.addArguments("--remote-allow-origins=*");
+    	WebDriver driver= new EdgeDriver();
+    	
+    	driver.navigate().to("https://www.facebook.com/login/");
+    	
+    	WebElement Emailaddress = driver.findElement(By.xpath("//input[@id=\"email\"]"));
+    	Emailaddress.sendKeys("ardoke1110@gmail.com");
+    	
+    	WebElement password = driver.findElement(By.xpath("//input[@id=\"pass\"]"));
+    	password.sendKeys("Ashwini@1");
+    	
+    	driver.findElement(By.xpath("//button[@id=\"loginbutton\"]")).click();
+    
+}
+}

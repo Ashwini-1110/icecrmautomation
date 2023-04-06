@@ -1,0 +1,26 @@
+package Exception;
+
+public class Marriage 
+{   void marriageOfficer()
+	{
+	System.out.println("inside marriage officer cabin");
+	Thread.sleep(3000);
+	}
+	void marriageAgentOffice()
+     {
+    	 System.out.println("inside marriage Agent office");
+    	 marriageOfficer();
+	 }
+    void marriageRegisterOffice() 
+    {
+    	System.out.println("inside marriage register office");
+    	marriageAgentOffice();
+    }
+	public static void main(String[] args) 
+	{
+		Marriage m= new Marriage();
+		m.marriageRegisterOffice();
+
+	}
+
+}

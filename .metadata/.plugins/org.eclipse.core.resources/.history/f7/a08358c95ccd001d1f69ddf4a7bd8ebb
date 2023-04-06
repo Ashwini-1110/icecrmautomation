@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <listeners>
+     <listener class-name="package com.ice_hrm_automation_utility.TestListeners"/>
+  </listeners>
+  <test name="Regression" parallel="classes"  >
+      
+      <classes>
+       <class name="com.ice_hrm_automation_TestNG.AddEmployeeInIcehrm"></class>
+      </classes>
+    
+  </test>
+  
+  
+</suite>

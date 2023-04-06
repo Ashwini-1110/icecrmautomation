@@ -1,0 +1,27 @@
+package Wrapper;
+class Outer
+{  int a= 200;
+  class Inner
+  { float b= 399.3f;
+  
+  }
+}
+
+public class Demo {
+
+	public static void main(String[] args) 
+	{
+		Outer o = new Outer();
+		System.out.println(o.a);
+		
+		Outer.Inner i1 = new Outer.Inner();
+		System.out.println(i1.b);
+		}
+
+	
+		
+	}
+
+	}
+
+

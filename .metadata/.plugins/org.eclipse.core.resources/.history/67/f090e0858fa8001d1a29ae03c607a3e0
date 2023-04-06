@@ -1,0 +1,16 @@
+package Exception;
+
+public class Sample 
+{    void m1() throws ArithmeticException
+      {
+	    System.out.println("m1 method");
+	    System.out.println(10/0);
+      }
+
+	public static void main(String[] args) throws ArithmeticException
+	{
+		Sample s = new Sample();
+		s.m1();
+	}
+
+}

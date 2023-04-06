@@ -1,0 +1,9 @@
+package com.ice_hrm_automation;
+
+public class FluentWaitExample 
+{
+  public static void main(String [] args)
+  {
+	  
+  }
+}

@@ -1,0 +1,32 @@
+package com.orangehrm_automation;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.ice_hrm_automation_utility.BaseClass;
+import com.ice_hrm_automation_utility.PropertyHandling;
+import com.orangehrm_automation.pages.MyInfoPage;
+
+public class UploadFile extends BaseClass
+{ 
+	MyInfoPage myinfo;
+	@BeforeClass
+	public void before()
+	{
+		PropertyHandling property = new PropertyHandling();
+		launchBrowser(property.getProperty("browser"));
+		driver.get(property.getProperty("orangehrmurl"));
+		property.getProperty("orangehrmusername");
+		property.getProperty("orangehrmpassword");
+		
+	    myinfo = new MyInfoPage(driver);
+	}
+	
+@Test
+public void login(String username , String Password)
+{
+	 myinfo.myInfo(username, Password);
+	
+}
+
+}

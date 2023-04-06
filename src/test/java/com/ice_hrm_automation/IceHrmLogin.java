@@ -1,0 +1,118 @@
+package com.ice_hrm_automation;
+
+import static org.testng.Assert.assertEquals;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class IceHrmLogin {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		//it is a instance of chrome driver  used to launch the  browser	
+		WebDriver driver= new ChromeDriver();
+		//navigation on website	
+		driver.get("https://cybersuccess.icehrm.com/");
+		//it find element to enter username
+		//1.valid username and valid password
+		WebElement Username=driver.findElement(By.id("username"));
+		Username.sendKeys("admin");
+
+		WebElement Password=driver.findElement(By.id("password"));
+		Password.sendKeys("2zuzfakn");
+
+		WebElement LogIn=driver.findElement(By.xpath("//button[contains(text(),'Log in')]"));
+		LogIn.click();
+		
+	  Thread.sleep(3000);
+	  
+	  driver.findElement(By.xpath("//span[text()=\"Employees\"]")).click();
+	  
+	  driver.findElement(By.xpath("//ul[@id='admin_Employees']//a[1]")).click();
+ 
+	  driver.findElement(By.xpath("//span[text()=' Add New']")).click();
+	  
+	  driver.findElement(By.id("employee_id")).sendKeys("8788158009");
+	  
+	  driver.findElement(By.id("first_name")).sendKeys("Ashwini");
+	  
+	  driver.findElement(By.id("middle_name")).sendKeys("Ramhari");
+	  
+	  driver.findElement(By.id("last_name")).sendKeys("Doke");
+	  
+	  driver.findElement(By.id("birthday")).sendKeys("2000-10-11");
+	  
+	  List<WebElement> nationality= driver.findElements(By.xpath("//div[@id='rc_select_0_list']/following::div[1]/div[1]/div/div/div"));
+	  
+	  for(int i=0; i<nationality.size();i++) 
+	  {
+		  WebElement country= nationality.get(i);
+		  
+		  String selectcountry = country.getText();
+		  
+		  if(selectcountry.equals("Austrian"))
+          {
+			  System.out.println(selectcountry);
+			  country.click();
+			  break;
+		  }
+	  }
+	  
+	  driver.findElement(By.id("rc_select_1")).click();
+	  
+	  List<WebElement> genderdropdown = driver.findElements(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
+	  
+	  for(int i= 0; i<genderdropdown.size(); i++)
+	  {
+		  WebElement elements = genderdropdown.get(i); 
+		  
+		  String Gender = elements.getText();
+		  
+		  if(Gender.equals("Female"))
+		  { System.out.println(Gender);
+			  elements.click();
+			  break;
+		  }
+	  }
+	  
+	  
+	  driver.findElement(By.id("rc_select_2")).click();
+	  
+	  List<WebElement> marriedstatus =driver.findElements(By.xpath("//div[@id='rc_select_2_list']/following::div[4]/div"));
+	//Thread.sleep(3000);
+	  for(int i= 0; i<marriedstatus.size(); i++)
+	  {
+		  WebElement status =marriedstatus.get(i);
+		  
+		  String MarritalStatus = status.getText();
+		  
+		  if(MarritalStatus.equals("Single"))
+		  {
+			System.out.println(MarritalStatus);  
+			status.click();
+			break;
+		  }
+	  }
+	  
+	  
+	  driver.findElement(By.xpath("//span[text()='Save']")).click();
+	  
+	 WebElement nextpage = driver.findElement(By.xpath("//div[text()='Employment Status']"));
+	  
+	  if(nextpage.isDisplayed())
+	  {
+		  System.out.println("next page is open");
+	  }
+	  else
+	  {
+		  System.out.println("required filled is mandatory");
+	  }
+	}
+
+}

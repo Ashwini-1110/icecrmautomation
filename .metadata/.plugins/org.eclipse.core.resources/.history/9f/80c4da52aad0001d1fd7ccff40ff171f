@@ -1,0 +1,14 @@
+package Collection1;
+
+import java.util.Vector;
+
+public class Enumeration 
+{
+  public static void main(String [] args)
+  {
+	  Vector v = new Vector();
+	  
+	  EnumerationCursor e = v.elements();
+  }
+}
+

@@ -1,0 +1,90 @@
+package com.ice_hrm_automation;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class BaseClass 
+{public WebDriver driver;
+   public void launchBrowser(String browser)
+   {
+	   switch(browser)
+	   {
+	   case "chrome": 
+		   System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		   driver= new ChromeDriver();
+		   break;
+			
+	   case "Edge":	
+		   System.setProperty("webdriver.edge.driver","msedgedriver.exe");
+		   driver= new EdgeDriver();
+		   break;
+	   default :
+		   System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+		   driver= new ChromeDriver();
+		 }
+     }
+   //perform a sendKeys operation on provided location (element)
+   public void enterText(By by , String text)
+   {  try {
+	   WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	   wait.until(ExpectedConditions.presenceOfElementLocated(by));
+	   //perform a click 
+	   driver.findElement(by).sendKeys(text);
+   }
+   catch(Exception e)
+   {
+	   e.printStackTrace();
+   }
+   }
+   //perform a click operation on the given loactor
+   public void click(By by)
+   {
+	try 
+	{
+		 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		 wait.until(ExpectedConditions.elementToBeClickable(by));
+		 
+		 driver.findElement(by).click();
+		   
+	}
+	catch(Exception e)
+	{
+	  e.printStackTrace();
+	}
+	   
+  }
+   
+   public void list(By by , String Text)
+   {
+	   try 
+	   {
+		List<WebElement> AllElements = driver.findElements(by);   
+	   
+		   for(int i= 0; i<AllElements.size(); i++)
+			  {
+				  WebElement elements = AllElements.get(i); 
+				  
+				  String Value = elements.getText();
+				  
+				  if(Value.equals(Text))
+				  { //System.out.println(Value);
+					  elements.click();
+					  break;
+				  }
+	   }
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+   }
+   
+}

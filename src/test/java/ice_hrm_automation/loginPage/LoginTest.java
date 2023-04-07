@@ -41,7 +41,7 @@ public class LoginTest extends BaseClass
 		String alertmsg = driver.findElement(loginpage.alert).getText();
 		
 		Assert.assertEquals(alertmsg, alert);
-		throw new Exception ("sample Exception");
+		
 	 }
 	  
   }

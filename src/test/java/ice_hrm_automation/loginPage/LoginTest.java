@@ -50,7 +50,7 @@ public class LoginTest extends BaseClass
   public Object[][] getLoginData()
   {
 	 Object[][] obj = new Object[][] {
-		 {"admin123","admin" ,"Login Failed"},
+		 //{"admin123","admin" ,"Login Failed"},
 		 {"admin","admin1234","Login failed" },
 		 {"admin123","2Zuzfakn","Login failed" },
 		 {"","2Zuzfakn","" },

@@ -15,7 +15,7 @@ public class MyInfoPage extends BaseClass
   By username = By.name("username");
   By password = By.name("password");
   By Login = By.xpath("//button[@type='submit']");
-  public By myInfoMenu = By.xpath("//div[@class='oxd-sidepanel-body']/ul/li[5]/a/span");
+  public By myInfoMenu = By.xpath("//div[@class='oxd-sidepanel-body']/ul/li[6]/a/span");
   public By profileimg = By.xpath("//img[@class='employee-image']");
   public  By addImg = By.xpath("//i[@class='oxd-icon bi-plus']");
   public By save = By.xpath("//button[@type='submit']");
